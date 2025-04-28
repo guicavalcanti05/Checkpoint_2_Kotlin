@@ -1,73 +1,71 @@
-# Checkpoint_2_Kotlin
-📈 CryptoMonitor
-Aplicativo Android feito para monitorar o valor do Bitcoin em tempo real usando a API pública do Mercado Bitcoin.
+# CryptoMonitor 📈
 
-🚀 Sobre o Projeto
-O CryptoMonitor é um app simples que mostra:
+App Android para monitorar o valor do Bitcoin em tempo real.
 
-O preço atual do Bitcoin em reais 🇧🇷
+---
 
-A última data/hora de atualização 📅
+## Sobre o projeto
 
-Um botão para atualizar manualmente os dados 🔄
+O CryptoMonitor é um app simples e funcional. Ele mostra:
 
-Ele foi feito usando Kotlin, Retrofit para consumo de API e Coroutines para chamadas assíncronas.
+- 💰 O preço atual do Bitcoin em reais (BRL)
+- 📅 A data e hora da última atualização
+- 🔄 Um botão para atualizar os dados manualmente
 
-📋 Como Funciona o MainActivity.kt
-A MainActivity é o coração da aplicação:
+Tudo isso puxando informações direto da API pública do Mercado Bitcoin.
 
-Quando o app é aberto, ela configura a Toolbar (a barra superior bonitona com o nome do app).
+---
 
-Ela também conecta o botão de Refresh que, ao ser clicado, faz uma chamada à API para buscar o valor mais recente do Bitcoin.
+## Como funciona o MainActivity.kt
 
-Quando a chamada é bem-sucedida, ela:
+- Ao abrir o app, a `MainActivity` configura a Toolbar com o título do app.
+- O botão "Refresh" dispara uma chamada para a API (`makeRestCall()`).
+- Quando a resposta chega:
+  - Atualiza o valor do Bitcoin (`lbl_value`) formatado como moeda brasileira.
+  - Atualiza a data/hora (`lbl_date`) baseado no timestamp retornado.
+- Se a chamada der erro (tipo 404 ou 500), o app mostra um Toast avisando o que rolou.
 
-Atualiza o preço do Bitcoin (lblValue) formatado no padrão brasileiro (R$ 00,00).
+A chamada à API é feita usando coroutines pra não travar a UI.
 
-Atualiza a data/hora (lblDate) convertendo o timestamp da API.
+---
 
-Se der ruim (API fora do ar, internet caiu, etc), mostra um Toast (aquela mensagenzinha pop-up) avisando o que aconteceu.
+## Estrutura de chamadas à API
 
-📦 Arquitetura do Backend
-MercadoBitcoinService.kt: Interface Retrofit que define o endpoint da API (/api/BTC/ticker/).
+- `MercadoBitcoinService.kt` → Define o endpoint `/api/BTC/ticker/` usando Retrofit.
+- `MercadoBitcoinServiceFactory.kt` → Cria uma instância do Retrofit já configurada.
+- `TickerResponse.kt` → Modela a resposta da API (valores como `last`, `high`, `low`, `date`, etc.).
 
-MercadoBitcoinServiceFactory.kt: Fábrica que cria uma instância do Retrofit com a URL base do Mercado Bitcoin.
+---
 
-TickerResponse.kt: Modelos de dados que mapeiam o JSON da resposta da API.
+## Estilo e Temas
 
-🎨 Interface
-O app também utiliza um tema bonitinho com:
+- Cores definidas em `Color.kt`
+- Tipografia customizada em `Type.kt`
+- Suporte a tema claro/escuro em `Theme.kt`
 
-Cores customizadas definidas em Color.kt
+---
 
-Tipografia personalizada em Type.kt
+## Tecnologias usadas
 
-Controle de tema claro/escuro em Theme.kt
+- Kotlin
+- Android Studio
+- Retrofit 2
+- Coroutines
+- Material Design 3
+- API do [Mercado Bitcoin](https://www.mercadobitcoin.com.br/)
 
-⚙️ Tecnologias Usadas
-Kotlin
+---
 
-Android Studio
 
-Retrofit 2
 
-Coroutines
-
-Material 3
-
-API pública do Mercado Bitcoin
-
-🧠 Possíveis Melhorias Futuras
-Mostrar gráfico de variação do BTC 📊
-
-Notificações de mudança de preço 🔔
-
-Suporte a outras criptomoedas 🪙
-
+## Prints
 
 Imagem 1
-![image](https://github.com/user-attachments/assets/c81e535d-c05d-45b4-afe6-7e9da1a1391d)
+![image](https://github.com/user-attachments/assets/0bf3a9b8-0e8d-4fcc-a68d-99bce38cd230)
+
 
 Imagem 2
-![image](https://github.com/user-attachments/assets/70039e8b-9463-4916-8fee-28475c427a14)
+![image](https://github.com/user-attachments/assets/a83add36-3d53-42f0-b41e-3bef42c8e037)
+
+---
 
